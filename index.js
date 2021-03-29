@@ -1,6 +1,17 @@
 fetch = require('node-fetch')
 
-exports.getprofile = async function(gamertag, options) {
+exports.getprofilebygt = async function(gamertag, authorization) {
     if(!gamertag) return 'null'
-    return await fetch('https://profile.xboxlive.com/users/gt(' + gamertag + ')/profile/settings?settings=' + options , { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + xbox_token_final.DisplayClaims.xui[0].uhs + ";" + xbox_token_final.Token}}).then(response => response.json())
+    var fetched = await fetch('https://profile.xboxlive.com/users/gt(' + gamertag + ')/profile/settings?settings=Gamertag,Gamerscore,GameDisplayPicRaw,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,Location,ModernGamertag,RealNameOverride,Watermarks,IsQuarantined,DisplayedLinkedAccounts', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken }}).then(response => response.json())
+    var json = {}
+    json.id = fetched.profileUsers[0].id
+    json.isSponsoredUser = fetched.profileUsers[0].isSponsoredUser
+    fetched.profileUsers[0].settings.forEach(settings => {if(settings.id != 'DisplayedLinkedAccounts') { json[settings.id] = settings.value } else { json[settings.id] = JSON.parse(settings.value) } });
+    return json
+}
+
+exports.getprofilebyxuid = async function(gamertag, options, authorization) {
+    if(!gamertag) return 'null'
+    var response = await fetch('https://profile.xboxlive.com/users/xuid(' + gamertag + ')/profile/settings?settings=' + options , { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken }}).then(response => response.json())
+    return 
 }
