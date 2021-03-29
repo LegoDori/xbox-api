@@ -30,7 +30,6 @@ exports.getprofilebyxuid = async function(gamertag, authorization) {
 
 exports.getownprofile = async function(authorization) {
     try {
-    if(!gamertag) return 'null'
     var fetched = await fetch('https://profile.xboxlive.com/users/me/profile/settings?settings=Gamertag,Gamerscore,GameDisplayPicRaw,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,Location,ModernGamertag,RealNameOverride,Watermarks,IsQuarantined,DisplayedLinkedAccounts', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken }}).then(response => response.json())
     var json = {}
     json.id = fetched.profileUsers[0].id
