@@ -89,7 +89,7 @@ exports.getownscreenshots = async function(authorization) {
 
 exports.getprofilerecentgames = async function(xuid, authorization) {
     try {
-    var fetched = await fetch('https://titlehub.xboxlive.com/users/xuid(' + xuid + ')/titles/titlehistory/decoration/achievement,image', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken }}).then(response => response.json())
+    var fetched = await fetch('https://titlehub.xboxlive.com/users/xuid(' + xuid + ')/titles/titlehistory/decoration/achievement,image', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_GB" }}).then(response => response.json())
     return fetched
     } catch {
         return 'null'
@@ -98,7 +98,7 @@ exports.getprofilerecentgames = async function(xuid, authorization) {
 
 exports.getownrecentgames = async function(authorization) {
     try {
-    var fetched = await fetch('https://titlehub.xboxlive.com/users/me/titles/titlehistory/decoration/achievement,image', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken }}).then(response => response.json())
+    var fetched = await fetch('https://titlehub.xboxlive.com/users/me/titles/titlehistory/decoration/achievement,image', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_GB" }}).then(response => response.json())
     return fetched
     } catch {
         return 'null'
