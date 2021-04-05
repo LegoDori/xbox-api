@@ -2,7 +2,9 @@
 
 A Simple Xbox API Wrapper for javascript
 
-`npm i @romanmender/xbox-api`
+`npm i https://github.com/RomanMender/xbox-api`
+
+## Example
 
     var xbox = require('xbox-api')
     
