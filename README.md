@@ -9,8 +9,8 @@ $ npm i https://github.com/RomanMender/xbox-api
 
 ## Example
 
- ~~~
- var xbox = require('xbox-api')
+~~~JS
+var xbox = require('xbox-api')
 
 var auth = {
         userHash: "11039641451625114727" ,
@@ -46,7 +46,7 @@ xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 
 ## Example
 
-~~~
+~~~JS
 const express = require('express')
 const app = express()
 app.listen(3000)
