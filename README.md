@@ -13,6 +13,8 @@ A Simple Xbox API Wrapper for javascript
     
     xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 
+##Documentation
+
 | Api Call  | Syntax  | Returns  |
 | ------------ | ------------ | ------------ |
 | Get Profile From Gamertag  | getprofilebygt(gamertag, auth)  | JSON  |
