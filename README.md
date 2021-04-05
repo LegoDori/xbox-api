@@ -53,7 +53,7 @@ var xbox = require('xbox-api')
 var clientinfo = {
    "client_id": "2295a725-0097-47eb-ba1d-c79dca4606e1",
    "redirect_uri": "http://localhost:3000/xbox/auth/callback",
-   "client_secret": "p53ug8UU5UygCCB-pST.Ut-_42EREmZ2zg"
+   "client_secret": "p53ug8Us5eygCCB-pST.Ut-_42E3Em62zg"
 }
 
 app.get('/xbox', (req, res) => {
