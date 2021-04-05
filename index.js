@@ -202,9 +202,9 @@ exports.gettoken = async function(code, clientinfo) {
         })
         var xbox_token_final = await fetch('https://xsts.auth.xboxlive.com/xsts/authorize', { method: 'POST', body: data_three, headers: { 'x-xbl-contract-version': '1', 'Content-Type': 'application/json' } }).then(response => response.json())
         fetched.token = xbox_token_final.Token
-        console.log(xbox_token_final.DisplayClaims.xui[0])
         fetched.UserHash = xbox_token_final.DisplayClaims.xui[0].uhs
         fetched.xuid = xbox_token_final.DisplayClaims.xui[0].xui
+        fetched.gamertag = xbox_token_final.DisplayClaims.xui[0].gtg
     return fetched
     } catch(e) {
         console.log(e)
