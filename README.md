@@ -20,7 +20,7 @@ A Simple Xbox API Wrapper for javascript
 | Get Profile From Gamertag  | getprofilebygt(gamertag, auth)  | JSON  |
 | Get Profile From Xuid  | getprofilebygt(xuid, auth)  | JSON  |
 | Get Own Profile  | getownprofile(auth)  | JSON  |
-| Get Xuid From Gamertag  | getprofilexuid(gamertag, auth)  | JSON  |
+| Get Xuid From Gamertag  | getprofilexuid(gamertag, auth)  | String  |
 | Get Clips From Xuid  | getprofilegameclips(xuid, auth)  | JSON  |
 | Get Own Clips  | getowngameclips(auth)  | JSON  |
 | Get Screenshots From Xuid  | getprofilescreenshots(xuid, auth)  | JSON  |
