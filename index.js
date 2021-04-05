@@ -123,3 +123,12 @@ exports.getallclubs = async function(authorization) {
         return 'null'
     }
 }
+
+exports.getclubbyid = async function(id, authorization) {
+    try {
+    var fetched = await fetch('https://clubhub.xboxlive.com/clubs/Ids('+ id +')/decoration/clubpresence,detail,settings,roster', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
