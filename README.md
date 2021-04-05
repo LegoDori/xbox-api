@@ -4,7 +4,7 @@ A Simple Xbox API Wrapper for javascript
 
 ## Installation
 ```shell
-$ npm i https://github.com/RomanMender/xbox-api
+$ npm i xbox-api
 ```
 
 ## Example
