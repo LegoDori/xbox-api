@@ -141,3 +141,12 @@ exports.fetchmessages = async function(xuid, authorization) {
         return 'null'
     }
 }
+
+exports.sendmessage = async function(xuid, message, authorization) {
+    try {
+    var fetched = await fetch('https://msg.xboxlive.com/users/xuid('+ xuid +')/outbox', { method: 'POST', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }, body: { "messageText": message }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
