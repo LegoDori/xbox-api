@@ -206,7 +206,8 @@ exports.gettoken = async function(code, clientinfo) {
         fetched.UserHash = xbox_token_final.xui[0].uhs
         fetched.xuid = xbox_token_final.xui[0].xui
     return fetched
-    } catch {
+    } catch(e) {
+        console.log(e)
         return 'null'
     }
 }
