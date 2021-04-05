@@ -41,4 +41,4 @@ A Simple Xbox API Wrapper for javascript
 | Api Call  | Syntax  | Returns  |
 | ------------ | ------------ | ------------ |
 | Get Token from Oauth2  | gettoken(code)  | JSON  |
-| Get Token from Oauth2 refresh  | gettoken(refresh)  | JSON  |
+| Get Token from Oauth2 refresh  | refreshtoken(refresh)  | JSON  |
