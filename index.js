@@ -52,7 +52,7 @@ exports.getprofilexuid = async function(gamertag, authorization) {
 
 exports.getprofilescreenshots = async function(gamertag, authorization) {
     try {
-    var fetched = await fetch('https://gameclipsmetadata.xboxlive.com/users/gt(' + gamertag + ')/type/?type=screenshot', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken }}).then(response => response.json())
+    var fetched = await fetch('https://gameclipsmetadata.xboxlive.com/users/gt(' + gamertag + ')/clips', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken }}).then(response => response.json())
     return fetched
     } catch {
         return 'null'
