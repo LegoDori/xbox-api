@@ -1,4 +1,5 @@
 fetch = require('node-fetch')
+FormData = require('form-data')
 
 exports.getprofilebygt = async function(gamertag, authorization) {
     try {
@@ -142,9 +143,68 @@ exports.fetchmessages = async function(xuid, authorization) {
     }
 }
 
+exports.deletemessage = async function(xuid, messageid, authorization) {
+    try {
+    var fetched = await fetch('https://msg.xboxlive.com/users/xuid('+ xuid +')/inbox/' + messageid, { method: 'DELETE', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+
 exports.sendmessage = async function(xuid, message, authorization) {
     try {
     var fetched = await fetch('https://msg.xboxlive.com/users/xuid('+ xuid +')/outbox', { method: 'POST', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }, body: { "messageText": message }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.makeauthurl = async function(clientinfo) {
+    try {
+    return `https://login.live.com/oauth20_authorize.srf?client_id=${clientinfo.client_id}&redirect_uri=${encodeURIComponent(clientinfo.redirect_uri)}&response_type=code&scope=Xboxlive.signin+Xboxlive.offline_access`
+    } catch {
+        return 'null'
+    }
+}
+
+exports.gettoken = async function(code, clientinfo) {
+    try {
+        var fetched = {}
+        var data = new FormData();
+        data.append('grant_type', 'authorization_code');
+        data.append('code', code);
+        data.append('client_id', clientinfo.client_id);
+        data.append('scope', 'Xboxlive.signin Xboxlive.offline_access');
+        data.append('redirect_uri', clientinfo.redirect_uri);
+        data.append('client_secret', clientinfo.client_secret);
+        var microsoft_code = await fetch('https://login.microsoftonline.com/consumers/oauth2/v2.0/token', { method: 'POST', body: data }).then(response => response.json())
+        fetched.refresh_token = microsoft_code.refresh_token
+        var data_two = JSON.stringify({
+          "RelyingParty": "http://auth.xboxlive.com",
+          "TokenType": "JWT",
+          "Properties": {
+            "AuthMethod": "RPS",
+            "SiteName": "user.auth.xboxlive.com",
+            "RpsTicket": "d=" + microsoft_code.access_token,
+          },
+        })
+        var xbox_pre_code = await fetch('https://user.auth.xboxlive.com/user/authenticate', { method: 'POST', body: data_two, headers: { 'x-xbl-contract-version': '0', 'Content-Type': 'application/json' } }).then(response => response.json())
+        var data_three = JSON.stringify({
+          "RelyingParty": "http://xboxlive.com",
+          "TokenType": "JWT",
+          "Properties": {
+            "UserTokens": [xbox_pre_code.Token],
+            "SandboxId": "RETAIL"
+          }
+        })
+        var xbox_token_final = await fetch('https://xsts.auth.xboxlive.com/xsts/authorize', { method: 'POST', body: data_three, headers: { 'x-xbl-contract-version': '1', 'Content-Type': 'application/json' } }).then(response => response.json())
+        xbox_token_final.DisplayClaims.xui[0].pfp = await fetch('https://profile.xboxlive.com/users/me/profile/settings?settings=AppDisplayPicRaw', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + xbox_token_final.DisplayClaims.xui[0].uhs + ";" + xbox_token_final.Token}}).then(response => response.json()).then(profile => profile.profileUsers[0].settings[0].value)
+        fetched.token = xbox_token_final.Token
+        fetched.UserHash = xbox_token_final.xui[0].uhs
+        fetched.xuid = xbox_token_final.xui[0].xui
     return fetched
     } catch {
         return 'null'
