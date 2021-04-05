@@ -201,8 +201,8 @@ exports.gettoken = async function(code, clientinfo) {
           }
         })
         var xbox_token_final = await fetch('https://xsts.auth.xboxlive.com/xsts/authorize', { method: 'POST', body: data_three, headers: { 'x-xbl-contract-version': '1', 'Content-Type': 'application/json' } }).then(response => response.json())
-        xbox_token_final.DisplayClaims.xui[0].pfp = await fetch('https://profile.xboxlive.com/users/me/profile/settings?settings=AppDisplayPicRaw', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + xbox_token_final.DisplayClaims.xui[0].uhs + ";" + xbox_token_final.Token}}).then(response => response.json()).then(profile => profile.profileUsers[0].settings[0].value)
         fetched.token = xbox_token_final.Token
+        console.log(xbox_token_final)
         fetched.UserHash = xbox_token_final.xui[0].uhs
         fetched.xuid = xbox_token_final.xui[0].xui
     return fetched
