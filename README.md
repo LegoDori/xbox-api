@@ -36,7 +36,12 @@ A Simple Xbox API Wrapper for javascript
 | Deletes a Message* | deletemessage(xuid, messageid, auth)  | JSON  |
 *Note: This endpoint doesnt work unless you have Xbox Gold
 
-## Xbox Oauth2
+# Xbox Oauth2
+
+## Example
+
+    var xbox = require('xbox-api')
+    
 
 | Api Call  | Syntax  | Returns  |
 | ------------ | ------------ | ------------ |
