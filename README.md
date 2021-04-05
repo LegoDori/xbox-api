@@ -33,5 +33,6 @@ A Simple Xbox API Wrapper for javascript
 | Get Club by ID | getclubbyid(id, auth)  | JSON  |
 | Gets Messages* | fetchmessages(xuid, auth)  | JSON  |
 | Sends a Message* | sendmessage(xuid, message, auth)  | JSON  |
+| Deletes a Message* | deletemessage(xuid, messageid, auth)  | JSON  |
 
 *Note: This endpoint doesnt work unless you have Xbox Gold
