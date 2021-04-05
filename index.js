@@ -132,3 +132,12 @@ exports.getclubbyid = async function(id, authorization) {
         return 'null'
     }
 }
+
+exports.fetchmessages = async function(xuid, authorization) {
+    try {
+    var fetched = await fetch('https://msg.xboxlive.com/users/xuid('+ xuid +')/inbox', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
