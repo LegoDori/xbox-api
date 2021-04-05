@@ -25,7 +25,7 @@ xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 | Api Call  | Syntax  | Returns  |
 | ------------ | ------------ | ------------ |
 | Get Profile From Gamertag  | getprofilebygt(gamertag, auth)  | JSON  |
-| Get Profile From Xuid  | getprofilebygt(xuid, auth)  | JSON  |
+| Get Profile From Xuid  | getprofilebyxuid(xuid, auth)  | JSON  |
 | Get Own Profile  | getownprofile(auth)  | JSON  |
 | Get Xuid From Gamertag  | getprofilexuid(gamertag, auth)  | String  |
 | Get Clips From Xuid  | getprofilegameclips(xuid, auth)  | JSON  |
