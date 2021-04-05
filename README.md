@@ -27,3 +27,4 @@ A Simple Xbox API Wrapper for javascript
 | Get Own Screenshots  | getownscreenshots(auth)  | JSON  |
 | Get Recent Games From Xuid  | getprofilerecentgames(xuid, auth)  | JSON  |
 | Get Own Recent Games  | getownrecentgames(auth)  | JSON  |
+| Get Current Clubs  | getallclubs(auth)  | JSON  |
