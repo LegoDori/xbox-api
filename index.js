@@ -90,7 +90,7 @@ exports.getownscreenshots = async function(authorization) {
 exports.getprofilerecentgames = async function(xuid, authorization) {
     try {
     var fetched = await fetch('https://titlehub.xboxlive.com/users/xuid(' + xuid + ')/titles/titlehistory/decoration/achievement,image', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en-GB" }}).then(response => response.json())
-    return fetched
+    return fetched.titles
     } catch {
         return 'null'
     }
@@ -99,7 +99,25 @@ exports.getprofilerecentgames = async function(xuid, authorization) {
 exports.getownrecentgames = async function(authorization) {
     try {
     var fetched = await fetch('https://titlehub.xboxlive.com/users/me/titles/titlehistory/decoration/achievement,image', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en-GB" }}).then(response => response.json())
-    return fetched
+    return fetched.titles
+    } catch {
+        return 'null'
+    }
+}
+
+exports.getownrecentgames = async function(authorization) {
+    try {
+    var fetched = await fetch('https://titlehub.xboxlive.com/users/me/titles/titlehistory/decoration/achievement,image', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en-GB" }}).then(response => response.json())
+    return fetched.titles
+    } catch {
+        return 'null'
+    }
+}
+
+exports.getallclubs = async function(authorization) {
+    try {
+    var fetched = await fetch('https://clubhub.xboxlive.com/clubs/me/decoration/clubpresence,detail,settings,roster', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched.clubs
     } catch {
         return 'null'
     }
