@@ -41,25 +41,26 @@ A Simple Xbox API Wrapper for javascript
 
 ## Example
 
-```const express = require('express')
-const app = express()
-app.listen(3000)
+    const express = require('express')
+    const app = express()
+    app.listen(3000)
 
-var xbox = require('xbox-api')
+    var xbox = require('xbox-api')
 
-var clientinfo = {
-   "client_id": "2295a725-0097-47eb-ba1d-c79dca4606e1",
-   "redirect_uri": "http://localhost:3000/xbox/auth/callback",
-   "client_secret": "p53ug8UU5UygCCB-pST.Ut-_42EREmZ2zg"
-}
+    var clientinfo = {
+        "client_id": "2295a725-0097-47eb-ba1d-c79dca4606e1",
+        "redirect_uri": "http://localhost:3000/xbox/auth/callback",
+        "client_secret": "p53ug8UU5UygCCB-pST.Ut-_42EREmZ2zg"
+        }
 
-app.get('/xbox', (req, res) => {
-    res.redirect(xbox.makeauthurl(clientinfo))
-})
+    app.get('/xbox', (req, res) => {
+        res.redirect(xbox.makeauthurl(clientinfo))
+    })
 
-app.get('/xbox/auth/callback', (req, res) => {
-    xbox.gettoken(req.query.code, clientinfo).then(finish => res.send(finish))
-})```
+    app.get('/xbox/auth/callback', (req, res) => {
+        xbox.gettoken(req.query.code, clientinfo).then(finish => res.send(finish))
+    })
+    
 
 | Api Call  | Syntax  | Returns  |
 | ------------ | ------------ | ------------ |
