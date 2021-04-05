@@ -114,9 +114,9 @@ exports.getownrecentgames = async function(authorization) {
     }
 }
 
-exports.getallclubs = async function(authorization) {
+exports.getallclubs = async function(xuid, authorization) {
     try {
-    var fetched = await fetch('https://clubhub.xboxlive.com/clubs/me/decoration/clubpresence,detail,settings,roster', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    var fetched = await fetch('https://clubhub.xboxlive.com/clubs/xuid(' + xuid + ')/decoration/clubpresence,detail,settings,roster', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
     return fetched.clubs
     } catch {
         return 'null'
