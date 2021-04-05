@@ -211,3 +211,45 @@ exports.gettoken = async function(code, clientinfo) {
         return 'null'
     }
 }
+
+exports.refreshtoken = async function(refresh, clientinfo) {
+    try {
+        var fetched = {}
+        var data = new FormData();
+        data.append('grant_type', 'refresh_token');
+        data.append('refresh_token', refresh);
+        data.append('client_id', clientinfo.client_id);
+        data.append('scope', 'Xboxlive.signin Xboxlive.offline_access');
+        data.append('redirect_uri', clientinfo.redirect_uri);
+        data.append('client_secret', clientinfo.client_secret);
+        var microsoft_code = await fetch('https://login.microsoftonline.com/consumers/oauth2/v2.0/token', { method: 'POST', body: data }).then(response => response.json())
+        fetched.refresh_token = microsoft_code.refresh_token
+        var data_two = JSON.stringify({
+          "RelyingParty": "http://auth.xboxlive.com",
+          "TokenType": "JWT",
+          "Properties": {
+            "AuthMethod": "RPS",
+            "SiteName": "user.auth.xboxlive.com",
+            "RpsTicket": "d=" + microsoft_code.access_token,
+          },
+        })
+        var xbox_pre_code = await fetch('https://user.auth.xboxlive.com/user/authenticate', { method: 'POST', body: data_two, headers: { 'x-xbl-contract-version': '0', 'Content-Type': 'application/json' } }).then(response => response.json())
+        var data_three = JSON.stringify({
+          "RelyingParty": "http://xboxlive.com",
+          "TokenType": "JWT",
+          "Properties": {
+            "UserTokens": [xbox_pre_code.Token],
+            "SandboxId": "RETAIL"
+          }
+        })
+        var xbox_token_final = await fetch('https://xsts.auth.xboxlive.com/xsts/authorize', { method: 'POST', body: data_three, headers: { 'x-xbl-contract-version': '1', 'Content-Type': 'application/json' } }).then(response => response.json())
+        fetched.token = xbox_token_final.Token
+        fetched.UserHash = xbox_token_final.DisplayClaims.xui[0].uhs
+        fetched.xuid = xbox_token_final.DisplayClaims.xui[0].xui
+        fetched.gamertag = xbox_token_final.DisplayClaims.xui[0].gtg
+    return fetched
+    } catch(e) {
+        console.log(e)
+        return 'null'
+    }
+}
