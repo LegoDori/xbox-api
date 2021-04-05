@@ -162,7 +162,7 @@ exports.sendmessage = async function(xuid, message, authorization) {
     }
 }
 
-exports.makeauthurl = async function(clientinfo) {
+exports.makeauthurl = function(clientinfo) {
     try {
     return `https://login.live.com/oauth20_authorize.srf?client_id=${clientinfo.client_id}&redirect_uri=${encodeURIComponent(clientinfo.redirect_uri)}&response_type=code&scope=Xboxlive.signin+Xboxlive.offline_access`
     } catch {
