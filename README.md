@@ -31,5 +31,7 @@ A Simple Xbox API Wrapper for javascript
 | Get Own Recent Games  | getownrecentgames(auth)  | JSON  |
 | Get Current Clubs  | getallclubs(auth)  | JSON  |
 | Get Club by ID | getclubbyid(id, auth)  | JSON  |
-| Gets Messages | fetchmessages(xuid, auth)  | JSON  |
-| Sends a Message | sendmessage(xuid, message, auth)  | JSON  |
+| Gets Messages* | fetchmessages(xuid, auth)  | JSON  |
+| Sends a Message* | sendmessage(xuid, message, auth)  | JSON  |
+
+*Note: This endpoint doesnt work unless you have Xbox Gold
