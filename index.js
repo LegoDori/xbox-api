@@ -207,7 +207,6 @@ exports.gettoken = async function(code, clientinfo) {
         fetched.gamertag = xbox_token_final.DisplayClaims.xui[0].gtg
     return fetched
     } catch(e) {
-        console.log(e)
         return 'null'
     }
 }
@@ -249,7 +248,6 @@ exports.refreshtoken = async function(refresh, clientinfo) {
         fetched.gamertag = xbox_token_final.DisplayClaims.xui[0].gtg
     return fetched
     } catch(e) {
-        console.log(e)
         return 'null'
     }
 }
