@@ -50,6 +50,8 @@ xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 
 # Xbox Oauth2
 
+Using the [Azure Portal](https://aka.ms/appregistrations) you can make a Oauth2 for xbox
+
 ## Example
 
 ~~~JS
