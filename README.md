@@ -70,7 +70,7 @@ app.get('/xbox', (req, res) => {
 })
 
 app.get('/xbox/auth/callback', (req, res) => {
-    xbox.gettoken(req.query.code, clientinfo).then(finish => res.send(finish))
+    xbox.gettoken(req.query.code, clientinfo).then(finish => res.send("Hello, " + finish.gamertag))
 })
 ~~~
     
