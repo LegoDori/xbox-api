@@ -35,6 +35,7 @@ xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 | Get Screenshots From Xuid  | getprofilescreenshots(xuid, auth)  | JSON  |
 | Get Own Screenshots  | getownscreenshots(auth)  | JSON  |
 | Get Recent Games From Xuid  | getprofilerecentgames(xuid, auth)  | JSON  |
+| Get Own Recent Games  | getownrecentgames(auth)  | JSON  |
 | Gets Messages* | fetchmessages(xuid, auth)  | JSON  |
 | Sends a Message* | sendmessage(xuid, message, auth)  | JSON  |
 | Deletes a Message* | deletemessage(xuid, messageid, auth)  | JSON  |
@@ -42,7 +43,6 @@ xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 
 | Api Call  | Syntax  | Returns  |
 | ------------ | ------------ | ------------ |
-| Get Own Recent Games  | getownrecentgames(auth)  | JSON  |
 | Get Current Clubs  | getallclubs(auth)  | JSON  |
 | Get Club by ID | getclubbyid(id, auth)  | JSON  |
 
