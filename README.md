@@ -38,7 +38,6 @@ xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 | Gets Messages* | fetchmessages(xuid, auth)  | JSON  |
 | Sends a Message* | sendmessage(xuid, message, auth)  | JSON  |
 | Deletes a Message* | deletemessage(xuid, messageid, auth)  | JSON  |
-
 ### Clubs
 
 | Api Call  | Syntax  | Returns  |
