@@ -1,6 +1,6 @@
 # xbox-api
 
-A Simple Xbox API Wrapper for javascript
+A Simple Xbox API Wrapper for javascript, If you want request any endpoints add a feature request on [Github](https://github.com/RomanMender/xbox-api).
 
 ## Installation
 ```shell
@@ -36,21 +36,35 @@ xbox.getprofilebygt("RomanMender3164", auth).then(finish => console.log(finish))
 | Get Own Screenshots  | getownscreenshots(auth)  | JSON  |
 | Get Recent Games From Xuid  | getprofilerecentgames(xuid, auth)  | JSON  |
 | Get Own Recent Games  | getownrecentgames(auth)  | JSON  |
+
+### Friends & Messaging
+
+| Api Call  | Syntax  | Returns  |
+| ------------ | ------------ | ------------ |
+| Get Friends From Xuid | getfriendsbyxuid(xuid, auth)  | JSON  |
+| Get Friends From Gamertag | getfriendsbyxuid(gamertag, auth)  | JSON  |
+| Get own friends | getfriendsbyxuid(auth)  | JSON  |
 | Gets Messages* | fetchmessages(xuid, auth)  | JSON  |
 | Sends a Message* | sendmessage(xuid, message, auth)  | JSON  |
 | Deletes a Message* | deletemessage(xuid, messageid, auth)  | JSON  |
+
+*Note: This endpoint doesnt work unless you have Xbox Gold
+
 ### Clubs
 
 | Api Call  | Syntax  | Returns  |
 | ------------ | ------------ | ------------ |
 | Get Current Clubs  | getallclubs(auth)  | JSON  |
-| Get Club by ID | getclubbyid(id, auth)  | JSON  |
-
-*Note: This endpoint doesnt work unless you have Xbox Gold
+| Get Club by ID | getclubbyid(clubid, auth)  | JSON  |
+| Ban user from Club | banuserfromclub(clubid, xuid, auth)  | JSON  |
+| Unban user from Club | unbanuserfromclub(clubid, xuid, auth)  | JSON  |
+| Add club moderator | addclubmoderator(clubid, xuid, auth)  | JSON  |
+| Remove club moderator | removeclubmoderator(clubid, xuid, auth)  | JSON  |
+| Remove user from club | removeuserfromclub(clubid, xuid, auth)  | JSON  |
 
 # Xbox Oauth2
 
-Using the [Azure Portal](https://aka.ms/appregistrations) you can make a Oauth2 for xbox
+Using the [Azure Portal](https://aka.ms/appregistrations) you can make a Oauth2 for xbox, you need the **Application (client) ID** you also need to add a redirect url in the **Authentication tab**, finally you need to go to **Certificates & secrets** and create a **Client Secret**, then you can make the Xbox Oauth2
 
 ## Example
 
@@ -64,7 +78,7 @@ var xbox = require('xbox-api')
 var clientinfo = {
    "client_id": "2295a725-0097-47eb-ba1d-c79dca4606e1",
    "redirect_uri": "http://localhost:3000/xbox/auth/callback",
-   "client_secret": "p53ug8Us5eygCCB-pST.Ut-_42E3Em62zg"
+   "client_secret": "p53ug8Us5eygCCB-pST.Ut-_42E3Em62zg" // keep this secret
 }
 
 app.get('/xbox', (req, res) => {

@@ -251,3 +251,75 @@ exports.refreshtoken = async function(refresh, clientinfo) {
         return 'null'
     }
 }
+
+exports.getfriendsbyxuid = async function(xuid, authorization) {
+    try {
+    var fetched = await fetch('https://profile.xboxlive.com/users/xuid('+ xuid +')/profile/people/people?settings=Gamertag,Gamerscore,GameDisplayPicRaw,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,Location,RealNameOverride,Watermarks,IsQuarantined,DisplayedLinkedAccounts', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.getfriendsbygt = async function(gt, authorization) {
+    try {
+    var fetched = await fetch('https://profile.xboxlive.com/users/gt('+ gt +')/profile/people/people?settings=Gamertag,Gamerscore,GameDisplayPicRaw,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,Location,RealNameOverride,Watermarks,IsQuarantined,DisplayedLinkedAccounts', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.getownfriends = async function(authorization) {
+    try {
+    var fetched = await fetch('https://profile.xboxlive.com/users/me/profile/people/people?settings=Gamertag,Gamerscore,GameDisplayPicRaw,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,Location,RealNameOverride,Watermarks,IsQuarantined,DisplayedLinkedAccounts', { method: 'GET', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.banuserfromclub = async function(clubid, xuid, authorization) {
+    try {
+    var fetched = await fetch('https://clubroster.xboxlive.com/clubs/' + clubid + '/users/xuid(' + xuid + ')/roles/', { method: 'POST', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }, body: { "userID": xuid, "roles":[""] }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.unbanuserfromclub = async function(clubid, xuid, authorization) {
+    try {
+    var fetched = await fetch('https://clubroster.xboxlive.com/clubs/' + clubid + '/users/xuid(' + xuid + ')/roles/', { method: 'POST', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }, body: { "userID": xuid, "roles":["Members"] }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.addclubmoderator = async function(clubid, xuid, authorization) {
+    try {
+    var fetched = await fetch('https://clubroster.xboxlive.com/clubs/' + clubid + '/users/xuid(' + xuid + ')/roles/', { method: 'POST', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }, body: { "userID": xuid, "roles":["Moderator"] }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.removeclubmoderator = async function(clubid, xuid, authorization) {
+    try {
+    var fetched = await fetch('https://clubroster.xboxlive.com/clubs/' + clubid + '/users/xuid(' + xuid + ')/roles/', { method: 'POST', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }, body: { "userID": xuid, "roles":["Member"] }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}
+
+exports.removeuserfromclub = async function(clubid, xuid, authorization) {
+    try {
+    var fetched = await fetch('https://clubroster.xboxlive.com/clubs/' + clubid + '/users/xuid(' + xuid + ')/', { method: 'DELETE', headers: {'x-xbl-contract-version': '2', 'Authorization': 'XBL3.0 x=' + authorization.userHash + ';' + authorization.XSTSToken, "Accept-Language": "en_us" }}).then(response => response.json())
+    return fetched
+    } catch {
+        return 'null'
+    }
+}

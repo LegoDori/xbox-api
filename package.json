@@ -1,12 +1,19 @@
 {
   "name": "xbox-api",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": {
+    "name": "RomanMender",
+    "url": "https://github.com/RomanMender/xbox-api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RomanMender/xbox-api#readme"
+  },
   "license": "ISC",
   "dependencies": {
     "form-data": "^4.0.0",
